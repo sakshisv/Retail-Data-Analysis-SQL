@@ -21,6 +21,14 @@ select count(*) from Transactions
 
 select count(*) Transaction_Returns from Transactions where Qty < 0
 
+--Q3. As you would have noticed, the dates provided across the datasets are not in a correct format. 
+--    As first steps, pls convert the date variables into valid date formats before proceeding ahead.
+
+select convert(date, DOB) DOB from Customer
+select convert(date, tran_date, 105) tran_date from Transactions
+
+
+
 
 
 select * from Customer
