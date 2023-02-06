@@ -46,6 +46,10 @@ select prod_cat from prod_cat_info where prod_subcat = 'DIY'
 
 --Q1. Which channel is most frequently used for transactions?
 
+select top 1 Store_type, count(transaction_id) Channel_Count from Transactions
+group by Store_type
+order by 2 desc
+
 
 
 select * from Customer
