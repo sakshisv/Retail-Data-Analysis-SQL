@@ -17,3 +17,12 @@ select count(*) from prod_cat_info
 Union
 select count(*) from Transactions
 
+--Q2. What is the total number of transactions that have a return?
+
+select count(*) Transaction_Returns from Transactions where Qty < 0
+
+
+
+select * from Customer
+select * from prod_cat_info
+select * from Transactions
