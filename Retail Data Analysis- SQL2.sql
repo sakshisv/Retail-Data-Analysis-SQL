@@ -50,7 +50,13 @@ select top 1 Store_type, count(transaction_id) Channel_Count from Transactions
 group by Store_type
 order by 2 desc
 
+--Q2. What is the count of Male and Female customers in the database?
 
+select Gender, COUNT(Gender) Gender_Count from Customer
+where Gender is not null
+group by Gender
+
+--
 
 select * from Customer
 select * from prod_cat_info
