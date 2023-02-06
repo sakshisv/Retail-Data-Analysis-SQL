@@ -27,6 +27,9 @@ select count(*) Transaction_Returns from Transactions where Qty < 0
 select convert(date, DOB) DOB from Customer
 select convert(date, tran_date, 105) tran_date from Transactions
 
+--Q4. What is the time range of the transaction data available for analysis? 
+--    Show the output in number of days, months and years simultaneously in different columns.
+
 
 
 
