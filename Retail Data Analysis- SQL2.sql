@@ -36,7 +36,17 @@ DATEDIFF(MONTH, min(tran_Date), max(tran_date)) Months,
 DATEDIFF(YEAR, min(tran_Date), max(tran_date)) Years from 
 (select convert(date, tran_date, 105) tran_date from Transactions) x
 
---
+--Q5. Which product category does the sub-category “DIY” belong to?
+
+select prod_cat from prod_cat_info where prod_subcat = 'DIY'
+
+------------------------------------------------------------------------------------------------------
+
+--DATA ANALYSIS
+
+--Q1. Which channel is most frequently used for transactions?
+
+
 
 select * from Customer
 select * from prod_cat_info
