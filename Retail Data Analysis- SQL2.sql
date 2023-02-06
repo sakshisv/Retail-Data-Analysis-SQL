@@ -56,6 +56,12 @@ select Gender, COUNT(Gender) Gender_Count from Customer
 where Gender is not null
 group by Gender
 
+--Q3. From which city do we have the maximum number of customers and how many?
+
+select top 1 city_code, COUNT(customer_id) Customer_Count from Customer
+group by city_code
+order by 2 desc
+
 --
 
 select * from Customer
