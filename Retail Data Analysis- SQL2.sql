@@ -30,9 +30,13 @@ select convert(date, tran_date, 105) tran_date from Transactions
 --Q4. What is the time range of the transaction data available for analysis? 
 --    Show the output in number of days, months and years simultaneously in different columns.
 
+select min(tran_Date) Start_Date, max(tran_date) End_Date, 
+DATEDIFF(DAY, min(tran_Date), max(tran_date)) No_of_Days,
+DATEDIFF(MONTH, min(tran_Date), max(tran_date)) Months,
+DATEDIFF(YEAR, min(tran_Date), max(tran_date)) Years from 
+(select convert(date, tran_date, 105) tran_date from Transactions) x
 
-
-
+--
 
 select * from Customer
 select * from prod_cat_info
