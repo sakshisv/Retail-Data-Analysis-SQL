@@ -62,7 +62,11 @@ select top 1 city_code, COUNT(customer_id) Customer_Count from Customer
 group by city_code
 order by 2 desc
 
---
+--Q4. How many sub-categories are there under the Books category?
+
+select count(prod_subcat) Subcat_Count from prod_cat_info
+where prod_cat = 'Books'
+
 
 select * from Customer
 select * from prod_cat_info
