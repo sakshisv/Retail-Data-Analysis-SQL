@@ -81,7 +81,9 @@ on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_cod
 where b.prod_cat in ('Electronics', 'Books')
 group by b.prod_cat
 
---
+--Q7. How many customers have >10 transactions with us, excluding returns?
+
+
 
 select * from Customer
 select * from prod_cat_info
