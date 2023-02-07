@@ -67,6 +67,13 @@ order by 2 desc
 select count(prod_subcat) Subcat_Count from prod_cat_info
 where prod_cat = 'Books'
 
+--Q5. What is the maximum quantity of products ever ordered?
+
+select top 1 Qty from Transactions
+where Qty > 0
+order by Qty desc
+
+--
 
 select * from Customer
 select * from prod_cat_info
