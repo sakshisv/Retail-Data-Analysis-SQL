@@ -25,7 +25,7 @@ select count(*) Transaction_Returns from Transactions where Qty < 0
 --    As first steps, pls convert the date variables into valid date formats before proceeding ahead.
 
 select convert(date, DOB) DOB from Customer
-select convert(date, tran_date, 105) tran_date from Transactions
+select convert(date, tran_date) tran_date from Transactions
 
 --Q4. What is the time range of the transaction data available for analysis? 
 --    Show the output in number of days, months and years simultaneously in different columns.
@@ -34,7 +34,7 @@ select min(tran_Date) Start_Date, max(tran_date) End_Date,
 DATEDIFF(DAY, min(tran_Date), max(tran_date)) No_of_Days,
 DATEDIFF(MONTH, min(tran_Date), max(tran_date)) Months,
 DATEDIFF(YEAR, min(tran_Date), max(tran_date)) Years from 
-(select convert(date, tran_date, 105) tran_date from Transactions) x
+(select convert(date, tran_date) tran_date from Transactions) x
 
 --Q5. Which product category does the sub-category “DIY” belong to?
 
@@ -72,6 +72,14 @@ where prod_cat = 'Books'
 select top 1 Qty from Transactions
 where Qty > 0
 order by Qty desc
+
+--Q6. What is the net total revenue generated in categories Electronics and Books?
+
+select b.prod_cat, round(sum(a.total_amt),0) Total_Revenue from Transactions a
+left join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+where b.prod_cat in ('Electronics', 'Books')
+group by b.prod_cat
 
 --
 
