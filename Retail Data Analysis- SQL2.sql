@@ -92,9 +92,16 @@ where b.Qty > 0
 group by a.customer_id) x
 where Transaction_Count > 10) y
 
+--Q8. What is the combined revenue earned from the “Electronics” & “Clothing” categories, from “Flagship stores”?
+
+select a.Store_type, round(sum(a.total_amt),0) Combined_Revenue from Transactions a
+left join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+where a.Store_type = 'Flagship store' and b.prod_cat in ('Electronics', 'Clothing')
+group by a.Store_type
+
 --
 
-
 select * from Customer
---select * from prod_cat_info
+select * from prod_cat_info
 select * from Transactions
