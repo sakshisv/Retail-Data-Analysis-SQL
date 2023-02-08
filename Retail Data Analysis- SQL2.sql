@@ -75,7 +75,7 @@ order by Qty desc
 
 --Q6. What is the net total revenue generated in categories Electronics and Books?
 
-select b.prod_cat, round(sum(a.total_amt),2) Total_Revenue from Transactions a
+select b.prod_cat, round(sum(a.total_amt), 2) Total_Revenue from Transactions a
 left join prod_cat_info b
 on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
 where b.prod_cat in ('Electronics', 'Books')
@@ -94,7 +94,7 @@ where Transaction_Count > 10) y
 
 --Q8. What is the combined revenue earned from the “Electronics” & “Clothing” categories, from “Flagship stores”?
 
-select a.Store_type, round(sum(a.total_amt),2) Combined_Revenue from Transactions a
+select a.Store_type, round(sum(a.total_amt), 2) Combined_Revenue from Transactions a
 left join prod_cat_info b
 on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
 where a.Store_type = 'Flagship store' and b.prod_cat in ('Electronics', 'Clothing')
@@ -103,14 +103,33 @@ group by a.Store_type
 --Q9. What is the total revenue generated from “Male” customers in “Electronics” category? 
 --    Output should display total revenue by prod sub-cat.
 
-select c.prod_subcat, round(sum(a.total_amt),2) Total_Revenue from Transactions a
+select c.prod_subcat, round(sum(a.total_amt), 2) Total_Revenue from Transactions a
 left join Customer b on a.cust_id = b.customer_Id
 left join prod_cat_info c
 on a.prod_cat_code = c.prod_cat_code and a.prod_subcat_code = c.prod_sub_cat_code
 where b.Gender = 'M' and c.prod_cat = 'Electronics'
 group by c.prod_subcat
 
---
+--Q10. What is percentage of sales and returns by product sub category; display only top 5 sub categories in terms of sales?
+
+select sum(total_amt) from Transactions
+
+select sum(total_amt) from Transactions where total_amt>0
+
+select sum(total_amt) from Transactions where Qty<0
+
+select top 5 b.prod_subcat, round(sum(a.total_amt)/100, 2) Sales_Percentage from Transactions a
+left join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+group by b.prod_subcat
+order by 2 desc
+
+select top 5 b.prod_subcat, round(sum(a.total_amt)/100, 2) Returns_Percentage from Transactions a
+left join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+where a.total_amt < 0
+group by b.prod_subcat
+order by 2 
 
 select * from Customer
 select * from prod_cat_info
