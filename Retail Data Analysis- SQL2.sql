@@ -83,8 +83,18 @@ group by b.prod_cat
 
 --Q7. How many customers have >10 transactions with us, excluding returns?
 
+select count(*) Customer_Count from (
+select customer_id, Transaction_Count from (
+select a.customer_id, count(b.transaction_id) Transaction_Count from Customer a
+left join Transactions b
+on a.customer_id = b.cust_id
+where b.Qty > 0
+group by a.customer_id) x
+where Transaction_Count > 10) y
+
+--
 
 
 select * from Customer
-select * from prod_cat_info
+--select * from prod_cat_info
 select * from Transactions
