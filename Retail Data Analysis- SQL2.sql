@@ -112,24 +112,27 @@ group by c.prod_subcat
 
 --Q10. What is percentage of sales and returns by product sub category; display only top 5 sub categories in terms of sales?
 
-select sum(total_amt) from Transactions
-
-select sum(total_amt) from Transactions where total_amt>0
-
-select sum(total_amt) from Transactions where Qty<0
-
-select top 5 b.prod_subcat, round(sum(a.total_amt)/100, 2) Sales_Percentage from Transactions a
-left join prod_cat_info b
+With a1 as (
+select top 5 b.prod_subcat, round((sum(a.total_amt)/(select sum(total_amt) from Transactions where total_amt > 0))*100, 2) Sales_Percentage 
+from Transactions a
+inner join prod_cat_info b
 on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+where a.total_amt > 0
 group by b.prod_subcat
-order by 2 desc
-
-select top 5 b.prod_subcat, round(sum(a.total_amt)/100, 2) Returns_Percentage from Transactions a
-left join prod_cat_info b
+order by 2 desc)
+,
+b1 as (
+select b.prod_subcat, round((sum(a.total_amt)/(select sum(total_amt) from Transactions where total_amt < 0))*100, 2) Returns_Percentage 
+from Transactions a
+inner join prod_cat_info b
 on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
 where a.total_amt < 0
-group by b.prod_subcat
-order by 2 
+group by b.prod_subcat)
+
+select a1.prod_subcat, a1.Sales_Percentage, b1.Returns_Percentage from a1
+left join b1 on a1.prod_subcat = b1.prod_subcat
+
+--
 
 select * from Customer
 select * from prod_cat_info
