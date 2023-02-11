@@ -152,8 +152,15 @@ where a.tran_date >= DATEADD(MONTH, -3, a.Max_tran_date) and a.Qty < 0
 group by b.prod_cat
 order by 2 
 
---Q
+--Q13. Which store-type sells the maximum products; by value of sales amount and by quantity sold?
 
+select top 1 a.Store_type, round(sum(a.total_amt),0) Sales_Amount, count(a.Qty) Qty_Sold from Transactions a
+inner join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+group by a.Store_type
+order by 2 desc
+
+--
 
 
 select * from Customer
