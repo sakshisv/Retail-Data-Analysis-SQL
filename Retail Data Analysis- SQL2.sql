@@ -172,7 +172,7 @@ having avg(a.total_amt) > a.Overall_Average
 --Q15. Find the average and total revenue by each subcategory for the categories which are among 
 --     top 5 categories in terms of quantity sold.
 
-select b.prod_subcat ,avg(a.total_amt) Average, sum(a.total_amt) Total_Revenue from Transactions a
+select b.prod_subcat, round(avg(a.total_amt),2) Average, round(sum(a.total_amt),2) Total_Revenue from Transactions a
 inner join prod_cat_info b
 on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
 where b.prod_cat IN (
@@ -182,7 +182,7 @@ on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_cod
 where a.Qty > 0
 group by b.prod_cat
 order by sum(a.total_amt) desc) 
-group by 
+group by b.prod_subcat
 
 select * from Customer
 select * from prod_cat_info
