@@ -169,7 +169,20 @@ on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_cod
 group by b.prod_cat, a.Overall_Average
 having avg(a.total_amt) > a.Overall_Average
 
---
+--Q15. Find the average and total revenue by each subcategory for the categories which are among 
+--     top 5 categories in terms of quantity sold.
+
+select b.prod_subcat ,avg(a.total_amt) Average, sum(a.total_amt) Total_Revenue from Transactions a
+inner join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+where b.prod_cat IN (
+select top 5 b.prod_cat from transactions a
+inner join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+where a.Qty > 0
+group by b.prod_cat
+order by sum(a.total_amt) desc) 
+group by 
 
 select * from Customer
 select * from prod_cat_info
