@@ -148,10 +148,12 @@ select top 1 b.prod_cat, sum(a.total_amt) MaxReturns from (
 select *, MAX(tran_date) OVER() as Max_tran_date from Transactions) a
 inner join prod_cat_info b
 on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
-where a.tran_date >= DATEADD(MONTH, -3, a.Max_tran_date)
-and a.Qty < 0
+where a.tran_date >= DATEADD(MONTH, -3, a.Max_tran_date) and a.Qty < 0
 group by b.prod_cat
 order by 2 
+
+--Q
+
 
 
 select * from Customer
