@@ -160,8 +160,16 @@ on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_cod
 group by a.Store_type
 order by 2 desc
 
---
+--Q14. What are the categories for which average revenue is above the overall average.
 
+select b.prod_cat from (
+select *, avg(total_amt) OVER() Overall_Average from Transactions) a
+inner join prod_cat_info b
+on a.prod_cat_code = b.prod_cat_code and a.prod_subcat_code = b.prod_sub_cat_code
+group by b.prod_cat, a.Overall_Average
+having avg(a.total_amt) > a.Overall_Average
+
+--
 
 select * from Customer
 select * from prod_cat_info
