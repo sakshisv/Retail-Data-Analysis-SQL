@@ -184,6 +184,4 @@ group by b.prod_cat
 order by sum(a.total_amt) desc) 
 group by b.prod_subcat
 
-select * from Customer
-select * from prod_cat_info
-select * from Transactions
+-------------------------------------------------------------------------------------------------------------------------------------
