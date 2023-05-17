@@ -1,3 +1,5 @@
+-------- RETAIL DATA CASE STUDY --------
+
 create database RETAIL_DATA
 
 use RETAIL_DATA
